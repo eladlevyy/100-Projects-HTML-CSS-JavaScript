@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 Projects &middot; HTML, CSS &amp; JavaScript</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #1e293b;
+      --card: #1e293b;
+      --card-hover: #273449;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #818cf8;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #1e293b 0%, var(--bg) 55%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .count {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 24px 80px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    a.card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    a.card:hover {
+      transform: translateY(-4px);
+      background: var(--card-hover);
+      border-color: var(--accent);
+    }
+
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+
+    .card span.open {
+      margin-top: auto;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 0 24px 48px;
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>100 Projects</h1>
+    <p>Sharpen your HTML, CSS and JavaScript skills by creating fun web components and mini projects. Pick a project below to see it live.</p>
+    <span class="count" id="count">Loading projects&hellip;</span>
+  </header>
+
+  <main>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    Based on the
+    <a href="https://youtube.com/playlist?list=PLyIXN-GMNpEPT34qnNMLfjnXm0SWVKsQG" target="_blank" rel="noopener">YouTube tutorial playlist</a>.
+  </footer>
+
+  <script>
+    const projects = [
+      { n: 1, dir: "1 - Responsive  Navigation Bar Tutorial Using HTML, CSS and JavaScript", title: "Responsive Navigation Bar" },
+      { n: 2, dir: "2 - How to Build Image Slider Using HTML, CSS and JavaScript", title: "Image Slider" },
+      { n: 3, dir: "3 - How To Create Tab Using HTML, CSS and JavaScript", title: "Tabs" },
+      { n: 4, dir: "4- How To Create Vertical Tab Using HTML, CSS and JavaScript", title: "Vertical Tabs" },
+      { n: 5, dir: "5 - How to create drop down, drop up, drop left and drop right", title: "Dropdown Directions" },
+      { n: 6, dir: "6 - How To Create a Modal Using HTML, CSS and JavaScript", title: "Modal" },
+      { n: 7, dir: "7 - How To Create an Accordion", title: "Accordion" },
+      { n: 8, dir: "8 - Tooltip with Only CSS", title: "CSS Tooltip" },
+      { n: 9, dir: "9- How To Create Sidebar Menu using HTML, CSS and JavaScript", title: "Sidebar Menu" },
+      { n: 10, dir: "10 - Create Todo App (Drag & Drop)", title: "Todo App (Drag & Drop)" },
+      { n: 11, dir: "11 - Checklist Todo App", title: "Checklist Todo App" },
+      { n: 12, dir: "12 - Custom Checkbox Tutorial & Card", title: "Custom Checkbox & Card" }
+    ];
+
+    const grid = document.getElementById("grid");
+    projects.forEach((p) => {
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = encodeURIComponent(p.dir) + "/index.html";
+      a.innerHTML =
+        '<span class="num">' + p.n + '</span>' +
+        '<h2>' + p.title + '</h2>' +
+        '<span class="open">Open project &rarr;</span>';
+      grid.appendChild(a);
+    });
+
+    document.getElementById("count").textContent = projects.length + " projects available";
+  </script>
+</body>
+</html>
