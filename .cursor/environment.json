@@ -1,11 +1,6 @@
 {
   "name": "100 Projects (HTML/CSS/JS)",
   "install": "python3 --version",
-  "terminals": [
-    {
-      "name": "static-server",
-      "command": "python3 -m http.server \"${PORT:-8000}\" --bind 0.0.0.0"
-    }
-  ],
+  "start": "python3 -m http.server \"${PORT:-8000}\" --bind 0.0.0.0",
   "ports": [{ "name": "static-server", "port": 8000 }]
 }
